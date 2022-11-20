@@ -1,4 +1,4 @@
-console.log('hello')
+console.log('hello');
 $(document).ready(onReady);
 
 function onReady(){
@@ -6,7 +6,7 @@ function onReady(){
     $('#submitButton').on('click', collectingEmployeeInfo);
 
 
-}
+};
 
 let employeeInfo = [];
 
@@ -34,7 +34,7 @@ function collectingEmployeeInfo(){
     employeeInfo.pop();
     
 
-}
+};
 
 function appendEmployeeInfo(){
     console.log('appendEmployeeInfo');
@@ -45,12 +45,13 @@ function appendEmployeeInfo(){
             <td>${index.lastName}</td>
             <td>${index.id}</td>
             <td>${index.jobTitle}</td>
-            <td>$${index.annualSalary}</td>
+            <td style: currency currency:USD>${index.annualSalary}</td>
+            <td><button class="deleteButton">Delete</button><td>
         </tbody>
     `)
 
 }
-}
+};
 
 function salaryCalc(){
     console.log('salaryCalc');
@@ -60,5 +61,9 @@ function salaryCalc(){
     }
     //console.log(totalNumber);
     console.log(totalSalary);
-    $()
+    $('#totalSalary').empty().append(`${totalSalary}`);
 }
+
+Intl.NumberFormat((totalSalary));
+
+console.log(totalSalary);
