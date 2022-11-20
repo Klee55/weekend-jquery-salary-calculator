@@ -4,7 +4,7 @@ $(document).ready(onReady);
 function onReady(){
     console.log('onReady');
     $('#submitButton').on('click', collectingEmployeeInfo);
-
+    $('#table').on('click', '.deleteButton', deleteEmployee);
 
 };
 
@@ -45,7 +45,7 @@ function appendEmployeeInfo(){
             <td>${index.lastName}</td>
             <td>${index.id}</td>
             <td>${index.jobTitle}</td>
-            <td style: currency currency:USD>${index.annualSalary}</td>
+            <td>${index.annualSalary}</td>
             <td><button class="deleteButton">Delete</button><td>
         </tbody>
     `)
@@ -62,8 +62,16 @@ function salaryCalc(){
     //console.log(totalNumber);
     console.log(totalSalary);
     $('#totalSalary').empty().append(`${totalSalary}`);
+    if (totalSalary > 20000){
+        $('#totalSalary').css('background-color', 'red');
+    };
+};
+
+function deleteEmployee(){
+    $(this).parent().remove();
+
 }
 
-Intl.NumberFormat((totalSalary));
+//Intl.NumberFormat((totalSalary));
 
-console.log(totalSalary);
+//console.log(totalSalary);
