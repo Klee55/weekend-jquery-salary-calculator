@@ -1,11 +1,24 @@
-table, td, th {
+html {
+    background-color:cornsilk;
+}
+
+table, tr, td, th {
     border-collapse: collapse;
     table-layout: fixed;
     border: 1px solid;
     width: 50%;
+    
+}
+
+th {
+    background-color: khaki;
 }
 
 
-tr.odd {
-    background-color: gainsboro;
+tbody:nth-child(even) {
+    background-color:lightsalmon;
+}
+
+tbody:nth-child(odd) {
+    background-color: khaki;
 }

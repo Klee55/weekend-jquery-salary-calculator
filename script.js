@@ -1,12 +1,12 @@
 console.log('hello');
 $(document).ready(onReady);
-console.log($(this));
+//console.log($(this));
 
 function onReady(){
     console.log('onReady');
     $('#submitButton').on('click', collectingEmployeeInfo);
     $('#table').on('click', '.deleteButton', deleteEmployee);
-
+    
 };
 
 let employeeInfo = [];
@@ -40,6 +40,11 @@ function collectingEmployeeInfo(){
 function appendEmployeeInfo(){
     console.log('appendEmployeeInfo');
     for ( let index of employeeInfo ){
+        let formatter2 = new Intl.NumberFormat('en-US',{
+            style: 'currency',
+            currency: 'USD',
+        });
+    let salary = formatter2.format(index.annualSalary);
     $('#table').append(`
         <tbody class="tableBody">
             <tr>
@@ -47,7 +52,7 @@ function appendEmployeeInfo(){
                 <td>${index.lastName}</td>
                 <td>${index.id}</td>
                 <td>${index.jobTitle}</td>
-                <td>${index.annualSalary}</td>
+                <td>${salary}</td>
                 <td><button class="deleteButton">Delete</button></td>
             </tr>  
             
@@ -57,27 +62,46 @@ function appendEmployeeInfo(){
 }
 };
 
+let totalSalary = 0;
+
+console.log(totalSalary);
+
+// let formatter = new Intl.NumberFormat('en-US',{
+//     style: 'currency',
+//     currency: 'USD',
+// });
+//const budget = formatter.format(20000);
+
+//console.log(formatter);
+
 function salaryCalc(){
     console.log('salaryCalc');
         //totalNumber = 0;
-    let totalSalary = 0;
+    //let totalSalary = 0;
     for ( let number of employeeInfo){
         totalSalary += Number(number.annualSalary);
     }
-    //console.log(totalNumber);
     console.log(totalSalary);
+    //console.log(totalNumber);
+    //console.log(totalSalary);
+    
     let formatter = new Intl.NumberFormat('en-US',{
         style: 'currency',
         currency: 'USD',
     });
-    formatter.format(totalSalary);
-    console.log(formatter.format(totalSalary));
-    $('#totalSalary').empty().append(`${totalSalary}`);
-
-    if (totalSalary > 20000){
+    let totalSalaryInCurrency = formatter.format(totalSalary);
+    //console.log(formatter.format(totalSalary));
+    //$('#totalSalary').empty().append(`${formatter}`);
+    console.log(totalSalary);
+    console.log(totalSalaryInCurrency);
+    $('#totalSalary').empty().text(`${totalSalaryInCurrency}`);
+    const budget = formatter.format(20000);
+    console.log(budget);
+    if (totalSalaryInCurrency > budget){
         $('#totalSalary').css('background-color', 'red');
     };
-};
+    //console.log(formatter.format(20000));
+}
 
 function deleteEmployee(){
     //$(this).parent().remove();
@@ -86,20 +110,6 @@ function deleteEmployee(){
 
 }
 
-$(this).parent().parent().remove();
-
-//Intl.NumberFormat((totalSalary));
-
-//console.log(totalSalary);
-
-// Create our number formatter.
-//let formatter = new Intl.NumberFormat('en-US', {
-    //style: 'currency',
-    //currency: 'USD',
-  
-    // These options are needed to round to whole numbers if that's what you want.
-    //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-    //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-  //});
-  
-  //console.log(formatter.format(2500)); /* $2,500.00 */
+//notes for instructor/evaluator
+//I was able to make the Total Monthly turn red when it exeeds 20,000,
+//but somehow some numbers like 500 or 5000 triggers the if statement
