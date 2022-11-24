@@ -95,9 +95,10 @@ function salaryCalc(){
     console.log(totalSalary);
     console.log(totalSalaryInCurrency);
     $('#totalSalary').empty().text(`${totalSalaryInCurrency}`);
-    const budget = formatter.format(20000);
+    const budget = 20000;//formatter.format(20000);
     console.log(budget);
-    if (totalSalaryInCurrency > budget){
+    console.log(totalSalaryInCurrency);
+    if (totalSalary > budget){
         $('#totalSalary').css('background-color', 'red');
     };
     //console.log(formatter.format(20000));
